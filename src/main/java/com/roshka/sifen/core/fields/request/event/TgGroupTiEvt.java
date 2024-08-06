@@ -16,6 +16,7 @@ public class TgGroupTiEvt extends SifenObjectBase {
     private TrGeVeDisconf rGeVeDisconf;
     private TrGeVeDescon rGeVeDescon;
     private TrGeVeTr rGeVeTr;
+    private TrGeVeNom rGeVeNom;
 
     // Automáticos
     private TrGeVeRetAce rGeVeRetAce;
@@ -49,6 +50,8 @@ public class TgGroupTiEvt extends SifenObjectBase {
 
         } else if (this.rGeVeTr != null) {
             this.rGeVeTr.setupSOAPElements(gGroupTiEvt);
+        } else if (this.rGeVeNom != null) {
+            this.rGeVeNom.setupSOAPElements(gGroupTiEvt);
         }
     }
 

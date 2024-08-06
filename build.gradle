@@ -5,14 +5,14 @@ plugins {
 }
 
 group "com.roshka.sifen"
-version "0.2.4"
+version "0.2.5"
 
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 sourceCompatibility = 1.8
 java {
-    withJavadocJar()
-    withSourcesJar()
+//    withJavadocJar()
+//    withSourcesJar()
 }
 
 repositories {
