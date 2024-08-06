@@ -102,7 +102,7 @@ public class TgTotSub extends SifenObjectBase {
             this.dTotOpe = this.dSub10.add(this.dSub5).add(this.dSubExo).add(this.dSubExe);
         }
         this.dDescTotal = this.dTotDesc.add(this.dTotDescGlotem);
-        this.dPorcDescTotal = this.dDescTotal.multiply(BigDecimal.valueOf(100)).divide(this.dTotOpe.add(this.dDescTotal), 2, RoundingMode.HALF_UP);
+        this.dPorcDescTotal = this.dTotDescGlotem.multiply(BigDecimal.valueOf(100)).divide(this.dTotOpe.add(this.dTotDescGlotem), 2, RoundingMode.HALF_UP);
         this.dAnticipo = this.dTotAntItem.add(this.dTotAnt);
 
         this.dRedon = RedondeoUtil.redondeoOficialSET(cMoneOpe, this.dTotOpe);
