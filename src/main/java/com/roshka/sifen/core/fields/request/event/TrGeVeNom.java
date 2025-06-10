@@ -4,6 +4,7 @@ import com.roshka.sifen.core.exceptions.SifenException;
 import com.roshka.sifen.core.types.PaisType;
 import com.roshka.sifen.core.types.TDepartamento;
 import com.roshka.sifen.core.types.TiNatRec;
+import com.roshka.sifen.core.types.TiTiOpe;
 import com.roshka.sifen.core.types.TiTipCont;
 import com.roshka.sifen.core.types.TiTipDocRec;
 import com.roshka.sifen.internal.response.SifenObjectBase;
@@ -18,7 +19,7 @@ public class TrGeVeNom extends SifenObjectBase {
     private String Id;
     private String mOtEve;
     private TiNatRec iNatRec;
-    private int iTiOpe;
+    private TiTiOpe iTiOpe;
     private PaisType cPaisRec;
     private String dDesPaisRe;
     private TiTipCont iTiContRec;
@@ -136,11 +137,11 @@ public class TrGeVeNom extends SifenObjectBase {
         this.iNatRec = iNatRec;
     }
 
-    public int getiTiOpe() {
+    public TiTiOpe getiTiOpe() {
         return iTiOpe;
     }
 
-    public void setiTiOpe(int iTiOpe) {
+    public void setiTiOpe(TiTiOpe iTiOpe) {
         this.iTiOpe = iTiOpe;
     }
 

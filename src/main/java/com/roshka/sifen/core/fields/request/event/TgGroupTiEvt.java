@@ -186,4 +186,40 @@ public class TgGroupTiEvt extends SifenObjectBase {
     public TrGeVeRem getrGeVeRem() {
         return rGeVeRem;
     }
+
+    public TrGeVeNom getrGeVeNom() {
+        return rGeVeNom;
+    }
+
+    public void setrGeVeNom(TrGeVeNom rGeVeNom) {
+        this.rGeVeNom = rGeVeNom;
+    }
+
+    public void setrGeVeRetAce(TrGeVeRetAce rGeVeRetAce) {
+        this.rGeVeRetAce = rGeVeRetAce;
+    }
+
+    public void setrGeVeRetAnu(TrGeVeRetAnu rGeVeRetAnu) {
+        this.rGeVeRetAnu = rGeVeRetAnu;
+    }
+
+    public void setrGeVeCCFF(TrGeVeCCFF rGeVeCCFF) {
+        this.rGeVeCCFF = rGeVeCCFF;
+    }
+
+    public void setrGeDevCCFFCue(TrGeDevCCFFCue rGeDevCCFFCue) {
+        this.rGeDevCCFFCue = rGeDevCCFFCue;
+    }
+
+    public void setrGeDevCCFFDev(TrGeDevCCFFDev rGeDevCCFFDev) {
+        this.rGeDevCCFFDev = rGeDevCCFFDev;
+    }
+
+    public void setrGeVeAnt(TrGeVeAnt rGeVeAnt) {
+        this.rGeVeAnt = rGeVeAnt;
+    }
+
+    public void setrGeVeRem(TrGeVeRem rGeVeRem) {
+        this.rGeVeRem = rGeVeRem;
+    }
 }
