@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.roshka.sifen.test.soap.SOAPTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.065 s - in com.roshka.sifen.test.soap.SOAPTests

@@ -10,9 +10,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import sun.security.x509.GeneralName;
-import sun.security.x509.X500Name;
-import sun.security.x509.X509CertImpl;
 
 import javax.xml.crypto.*;
 import javax.xml.crypto.dsig.*;
@@ -197,12 +194,12 @@ public class SignatureHelper {
         List<ValidezFirmaDigital.SujetoCertificado> certificateSubjects = new ArrayList<>();
 
         // Get certificate from Electronic Document
-        X509CertImpl certificate = (X509CertImpl) X509KeySelector.getCertificate(keyInfo);
+        X509Certificate certificate = X509KeySelector.getCertificate(keyInfo);
         if (certificate == null) return certificateSubjects;
 
         // Get main subject information from certificate
         try {
-            String subject = certificate.getSubjectDN().getName();
+            String subject = certificate.getSubjectX500Principal().getName();
 
             certificateSubjects.add(ValidezFirmaDigital.SujetoCertificado.create(
                     getAttributeFromSubject(subject, "SERIALNUMBER"),
@@ -213,16 +210,17 @@ public class SignatureHelper {
 
         // Get alternatives subjects from certificate
         try {
-            List<GeneralName> names = certificate.getSubjectAlternativeNameExtension().get("subject_name").names();
-            for (GeneralName name : names) {
-                if (!(name.getName() instanceof X500Name)) continue;
+            if (certificate.getSubjectAlternativeNames() != null) {
+                for (List<?> name : certificate.getSubjectAlternativeNames()) {
+                    if (name.size() == 2 && ((Integer) name.get(0)) == 4) { // 4 means directoryName
+                        String subject = (String) name.get(1);
 
-                String subject = name.getName().toString();
-
-                certificateSubjects.add(ValidezFirmaDigital.SujetoCertificado.create(
-                        getAttributeFromSubject(subject, "SERIALNUMBER"),
-                        SifenUtil.coalesce(getAttributeFromSubject(subject, "CN"), getAttributeFromSubject(subject, "O"))
-                ));
+                        certificateSubjects.add(ValidezFirmaDigital.SujetoCertificado.create(
+                                getAttributeFromSubject(subject, "SERIALNUMBER"),
+                                SifenUtil.coalesce(getAttributeFromSubject(subject, "CN"), getAttributeFromSubject(subject, "O"))
+                        ));
+                    }
+                }
             }
         } catch (Exception ignored) {
         }

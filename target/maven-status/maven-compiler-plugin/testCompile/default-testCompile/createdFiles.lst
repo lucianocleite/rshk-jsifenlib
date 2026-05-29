@@ -1,0 +1,10 @@
+com/roshka/sifen/test/http/HTTPTests.class
+com/roshka/sifen/test/de/DEMonedaExtranjeraTest.class
+com/roshka/sifen/test/de/ConsultaRUCTest.class
+com/roshka/sifen/test/de/DETestBase.class
+com/roshka/sifen/test/fields/TdCEedFieldTests.class
+com/roshka/sifen/test/signature/SignatureTests.class
+com/roshka/sifen/test/de/DETest.class
+com/roshka/sifen/test/de/RedondeoOficialTest.class
+com/roshka/sifen/test/format/FieldFormatUtilsTests.class
+com/roshka/sifen/test/soap/SOAPTests.class
