@@ -33,12 +33,28 @@ public class TgCamIVA extends SifenObjectBase {
         BigDecimal hundred = BigDecimal.valueOf(100);
         BigDecimal propIVA = this.dPropIVA.divide(hundred, scale, RoundingMode.HALF_UP);
         if (this.iAfecIVA.getVal() == 1 || this.iAfecIVA.getVal() == 4) {
+            /* CODIGO ORIGINAL (comentado para rollback se necessario):
             if (this.dTasaIVA.equals(BigDecimal.valueOf(10))) {
                 this.dBasGravIVA = dTotOpeItem.multiply(propIVA).divide(BigDecimal.valueOf(1.1), scale, RoundingMode.HALF_UP);
                 this.dLiqIVAItem = dTotOpeItem.multiply(propIVA).divide(BigDecimal.valueOf(11), scale, RoundingMode.HALF_UP);
             } else if (this.dTasaIVA.equals(BigDecimal.valueOf(5))) {
                 this.dBasGravIVA = dTotOpeItem.multiply(propIVA).divide(BigDecimal.valueOf(1.05), scale, RoundingMode.HALF_UP);
                 this.dLiqIVAItem = dTotOpeItem.multiply(propIVA).divide(BigDecimal.valueOf(21), scale, RoundingMode.HALF_UP);
+            }
+            */
+            if (this.dBasGravIVA == null) {
+                if (this.dTasaIVA.equals(BigDecimal.valueOf(10))) {
+                    this.dBasGravIVA = dTotOpeItem.multiply(propIVA).divide(BigDecimal.valueOf(1.1), scale, RoundingMode.HALF_UP);
+                } else if (this.dTasaIVA.equals(BigDecimal.valueOf(5))) {
+                    this.dBasGravIVA = dTotOpeItem.multiply(propIVA).divide(BigDecimal.valueOf(1.05), scale, RoundingMode.HALF_UP);
+                }
+            }
+            if (this.dLiqIVAItem == null) {
+                if (this.dTasaIVA.equals(BigDecimal.valueOf(10))) {
+                    this.dLiqIVAItem = dTotOpeItem.multiply(propIVA).divide(BigDecimal.valueOf(11), scale, RoundingMode.HALF_UP);
+                } else if (this.dTasaIVA.equals(BigDecimal.valueOf(5))) {
+                    this.dLiqIVAItem = dTotOpeItem.multiply(propIVA).divide(BigDecimal.valueOf(21), scale, RoundingMode.HALF_UP);
+                }
             }
         } else {
             this.dBasGravIVA = BigDecimal.ZERO;
@@ -51,9 +67,14 @@ public class TgCamIVA extends SifenObjectBase {
 
         if (generationCtx.isHabilitarNotaTecnica13()) {
             if (this.iAfecIVA.getVal() == 4) {
+                /* CODIGO ORIGINAL (comentado para rollback se necessario):
                 // Actualización: https://ekuatia.set.gov.py/portal/ekuatia/detail?content-id=/repository/collaboration/sites/ekuatia/documents/documentacion/documentacion-tecnica/NT_E_KUATIA_013_MT_V150.pdf
                 // E737 = [100 * EA008 * (100 – E733)] / [10000 + (E734 * E733)]
                 this.dBasExe = (dTotOpeItem.multiply(hundred.subtract(dPropIVA)).multiply(hundred)).divide((this.dTasaIVA.multiply(dPropIVA)).add(BigDecimal.valueOf(10000)), scale, RoundingMode.HALF_UP);
+                */
+                if (this.dBasExe == null) {
+                    this.dBasExe = (dTotOpeItem.multiply(hundred.subtract(dPropIVA)).multiply(hundred)).divide((this.dTasaIVA.multiply(dPropIVA)).add(BigDecimal.valueOf(10000)), scale, RoundingMode.HALF_UP);
+                }
             } else {
                 this.dBasExe = BigDecimal.valueOf(0);
             }
