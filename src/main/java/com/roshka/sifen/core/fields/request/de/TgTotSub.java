@@ -68,13 +68,20 @@ public class TgTotSub extends SifenObjectBase {
                 BigDecimal dBasGravIVA = gCamIVA.getdBasGravIVA();
 
                 if (gCamIVA.getiAfecIVA().getVal() == 1 || gCamIVA.getiAfecIVA().getVal() == 4) {
+                    BigDecimal parcelaGravada = dTotOpeItem;
+                    if (gCamIVA.getiAfecIVA().getVal() == 4) {
+                        BigDecimal dBasExe = gCamIVA.getdBasExe() != null ? gCamIVA.getdBasExe() : BigDecimal.ZERO;
+                        parcelaGravada = dTotOpeItem.subtract(dBasExe);
+                        this.dSubExe = this.dSubExe.add(dBasExe);
+                    }
+                    
                     if (gCamIVA.getdTasaIVA().equals(BigDecimal.valueOf(10))) {
-                        this.dSub10 = this.dSub10.add(dTotOpeItem);
+                        this.dSub10 = this.dSub10.add(parcelaGravada);
                         this.dIVA10 = this.dIVA10.add(dLiqIVAItem);
                         this.dBaseGrav10 = this.dBaseGrav10.add(dBasGravIVA);
                         this.dLiqTotIVA10 = BigDecimal.ZERO;
                     } else if (gCamIVA.getdTasaIVA().equals(BigDecimal.valueOf(5))) {
-                        this.dSub5 = this.dSub5.add(dTotOpeItem);
+                        this.dSub5 = this.dSub5.add(parcelaGravada);
                         this.dIVA5 = this.dIVA5.add(dLiqIVAItem);
                         this.dBaseGrav5 = this.dBaseGrav5.add(dBasGravIVA);
                         this.dLiqTotIVA5 = BigDecimal.ZERO;
